@@ -8,8 +8,8 @@ const productSchema = new Schema({
     description: { type: String, required: true },
     brand: { type: String, required: true },
     imageUrl: { type: String, required: true },
-    category: { type: String, required: true },
-    reviews: [{ type: Schema.Types.ObjectId, ref: "Reviews" }],
+    category: { type: String, required: true, enum: ["CategoryOne", "CategoryTwo", "CategoryTree"] },
+    reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
 },
     {
         timestamps: true
