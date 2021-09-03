@@ -26,7 +26,7 @@ reviewsRouter.get("/", async(req,res,next) => {
 reviewsRouter.get("/:id", async(req,res,next) => {
   try {
     const id = req.params.id
-    const review = await ReviewModel.findById(id) 
+    const review = await ReviewModel.findById(id)
     if(review){
       res.send(review)
     } else {

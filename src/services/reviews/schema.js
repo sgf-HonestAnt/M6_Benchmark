@@ -5,8 +5,8 @@ const {Schema, model} = mongoose
 const reviewSchema = new Schema({
   comment: { type: String, required: true},
   rate: { type: Number, required: true, enum: [1,2,3,4,5] },
-  product: { type: Schema.Types.ObjectId, ref: "Product", required: true },
-  user: { type: Schema.Types.ObjectId, ref: "User", required: true }
+  productId: { type: Schema.Types.ObjectId, ref: "Product", required: true },
+  userId: { type: Schema.Types.ObjectId, ref: "User", required: true }
 }, { 
   timestamps: true 
 })
