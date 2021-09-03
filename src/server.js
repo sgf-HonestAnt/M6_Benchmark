@@ -8,6 +8,7 @@ import cartsRouter from './services/carts/index.js'
 
 import productRouter from './services/products/index.js'
 import reviewsRouter from './services/reviews/index.js'
+import usersRouter from './services/users/index.js'
 
 
 
@@ -18,10 +19,9 @@ const server = express()
 server.use(cors())
 server.use(express.json())
 
-
-server.use('/carts', cartsRouter)
-
 server.use("/products", productRouter)
+server.use('/users', usersRouter)
+server.use('/carts', cartsRouter)
 
 
 server.use(badRequestErrorHandler)
