@@ -7,6 +7,7 @@ import { badRequestErrorHandler, notFoundErrorHandler, catchAllErrorHandler } fr
 import productRouter from './services/products/index.js'
 import reviewsRouter from './services/reviews/index.js'
 import usersRouter from './services/users/index.js'
+import cartsRouter from './services/carts/index.js'
 
 const server = express()
 
@@ -16,6 +17,7 @@ server.use(express.json())
 server.use("/products", productRouter)
 server.use("/reviews", reviewsRouter)
 server.use("/users", usersRouter)
+server.use('/carts', cartsRouter)
 
 server.use(badRequestErrorHandler)
 server.use(notFoundErrorHandler)

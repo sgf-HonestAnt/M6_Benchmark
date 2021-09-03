@@ -5,6 +5,7 @@ import multer from 'multer'
 import { mediaStorage } from '../../utilities/mediaStorage.js'
 import q2m from 'query-to-mongo'
 
+
 const productRouter = Router()
 
 productRouter.get("/", async (req, res, next) => {
@@ -20,7 +21,7 @@ productRouter.get("/", async (req, res, next) => {
 
 productRouter.get("/:id", async (req, res, next) => {
     try {
-        const singleData = await ProductModel.findById(req.params.id).populate("reviews")
+        const singleData = await ProductModel.findById(req.params.id)
         if (singleData) {
             res.send(singleData)
         } else {
@@ -43,7 +44,7 @@ productRouter.post("/", async (req, res, next) => {
     }
 })
 
-productRouter.post("/:id/img", multer({ storage: mediaStorage }).single("cover"), async (req, res, next) => { // CHECK
+productRouter.post("/:id/img", multer({ storage: mediaStorage }).single("cover"), async (req, res, next) => {
     try {
         const id = req.params.id
         const product = await ProductModel.findById(id)
@@ -61,11 +62,11 @@ productRouter.post("/:id/img", multer({ storage: mediaStorage }).single("cover")
 })
 
 productRouter.put("/:id", async (req, res, next) => {
-
     try {
         const updatedData = await ProductModel.findByIdAndUpdate(req.params.id, req.body, {
             new: true
         })
+
         if (updatedData) {
             res.send(updatedData)
         } else {
@@ -78,7 +79,6 @@ productRouter.put("/:id", async (req, res, next) => {
 })
 
 productRouter.delete("/:id", async (req, res, next) => {
-
     try {
         const deletedData = await ProductModel.findByIdAndDelete(req.params.id)
 
@@ -92,6 +92,5 @@ productRouter.delete("/:id", async (req, res, next) => {
         next(error);
     }
 })
-
 
 export default productRouter

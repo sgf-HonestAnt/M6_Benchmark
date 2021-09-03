@@ -8,7 +8,6 @@ const productSchema = new Schema({
     brand: { type: String, required: true },
     imageUrl: { type: String, required: true },
     category: { type: String, required: true, enum: ["CategoryOne", "CategoryTwo", "CategoryTree"] },
-    // likes: [{ type: Schema.Types.ObjectId, ref: "Author" }],
     reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
 },
     {
@@ -25,6 +24,5 @@ productSchema.static("findProducts", async function (query) {
 
     return { total, products }
 })
-
 
 export default model("Product", productSchema)
