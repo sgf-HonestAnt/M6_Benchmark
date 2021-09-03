@@ -33,7 +33,7 @@ const { PORT } = process.env
 
 
 
-mongoose.connect(process.env.MONGO_CONNECTION)
+mongoose.connect(process.env.MONGODB_URI)
 
 mongoose.connection.on("connected", () => {
     console.log("✅ Successfully connected to MONGO!");
