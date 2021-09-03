@@ -22,6 +22,7 @@ server.use(express.json())
 server.use("/products", productRouter)
 server.use('/users', usersRouter)
 server.use('/carts', cartsRouter)
+server.use('/reviews', reviewsRouter)
 
 
 server.use(badRequestErrorHandler)
