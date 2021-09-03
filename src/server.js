@@ -3,8 +3,12 @@ import listEndpoints from 'express-list-endpoints'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import { badRequestErrorHandler, notFoundErrorHandler, catchAllErrorHandler } from './utilities/errorHandlers.js'
+
+import cartsRouter from './services/carts/index.js'
+
 import productRouter from './services/products/index.js'
 import reviewsRouter from './services/reviews/index.js'
+
 
 
 
@@ -14,8 +18,11 @@ const server = express()
 server.use(cors())
 server.use(express.json())
 
+
+server.use('/carts', cartsRouter)
+
 server.use("/products", productRouter)
-server.use("/reviews", reviewsRouter)
+
 
 server.use(badRequestErrorHandler)
 server.use(notFoundErrorHandler)
