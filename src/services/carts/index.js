@@ -3,7 +3,18 @@ import CartModel from './schema.js'
 import createError from 'http-errors'
 import ProductModel from '../products/schema.js'
 
+
 const cartsRouter = express.Router()
+
+cartsRouter.get("/:userId/addProduct", async (req, res, next) => {
+    try {
+        const cart = await CartModel.find({})
+        res.send(cart)
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+})
 
 cartsRouter.post('/:userId/addProduct', async(req, res, next) => {
 
@@ -17,7 +28,7 @@ cartsRouter.post('/:userId/addProduct', async(req, res, next) => {
             if (isProductPresent) {
                 const updatedCart = await CartModel.findOneAndUpdate({ userId: req.params.userId, status: 'active', "products._id": purchasedProduct._id }, {
                     $inc: {
-                        "products.$.quantity": req.body.quantity
+                        "products.$.quantity": req.body.quantity,
                     }
                 }, {
                     new: true,

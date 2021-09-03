@@ -45,15 +45,16 @@ productRouter.post("/", async (req, res, next) => {
     }
 })
 
-productRouter.post("/:id/img", multer({ storage: mediaStorage }).single("cover"), async (req, res, next) => {
+productRouter.post("/:id/img", multer({ storage: mediaStorage }).single("imageUrl"), async (req, res, next) => {
     try {
+        console.log(req.file.path);
         const id = req.params.id
         const product = await ProductModel.findById(id)
         if (product) {
-            const modifiedproduct = await ProductModel.findByIdAndUpdate(id, { cover: req.file.path }, {
-                new: true // returns the modified user
+            const modifiedProduct = await ProductModel.findByIdAndUpdate(id, { imageUrl: req.file.path }, {
+                new: true
             })
-            res.send(modifiedproduct)
+            res.send(modifiedProduct)
         } else {
             next(createError(404, `product Post with id ${id} not found!`))
         }

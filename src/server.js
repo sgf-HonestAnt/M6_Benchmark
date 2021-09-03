@@ -5,7 +5,6 @@ import mongoose from 'mongoose'
 import { badRequestErrorHandler, notFoundErrorHandler, catchAllErrorHandler } from './utilities/errorHandlers.js'
 
 import cartsRouter from './services/carts/index.js'
-
 import productRouter from './services/products/index.js'
 import reviewsRouter from './services/reviews/index.js'
 import usersRouter from './services/users/index.js'
