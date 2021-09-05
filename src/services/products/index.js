@@ -12,7 +12,7 @@ const productRouter = Router()
 productRouter.get("/", async (req, res, next) => {
     try {
         const query = q2m(req.query)
-        const { total, products } = await ProductModel.findProducts(query)
+        const { total, products } = await ProductModel.findProducts(query).populate("reviews")
         res.send({ links: query.links("/products", total), total, products, pageTotal: Math.ceil(total / query.options.limit) })
     } catch (error) {
         console.log(error);
@@ -22,7 +22,7 @@ productRouter.get("/", async (req, res, next) => {
 
 productRouter.get("/:id", async (req, res, next) => {
     try {
-        const singleData = await ProductModel.findById(req.params.id)
+        const singleData = await ProductModel.findById(req.params.id).populate("reviews")
         if (singleData) {
             res.send(singleData)
         } else {
