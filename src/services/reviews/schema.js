@@ -11,6 +11,17 @@ const reviewSchema = new Schema({
   timestamps: true 
 })
 
+reviewSchema.static("findReviews", async function(query) {
+  const total = await this.countDocuments(query.criteria)
+  const reviews = await this.find(query.criteria, query.options.fields)
+      .limit(query.options.limit)
+      .skip(query.options.skip)
+      .sort(query.options.sort) // no matter how I write them, mongo is going to apply  ALWAYS sort skip limit in this order
+      .populate("product").populate("user")
+
+  return { total, reviews }
+})
+
 export default model("Review", reviewSchema) 
 
 // {

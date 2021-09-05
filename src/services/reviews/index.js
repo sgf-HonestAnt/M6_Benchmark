@@ -42,12 +42,23 @@ reviewsRouter.post("/", async (req, res, next) => {
   }
 })
 
+// reviewsRouter.get("/", async (req, res, next) => {
+//   try {
+//     const reviews = await ReviewModel.find({}).populate("product").populate("user")
+//     res.send(reviews)
+//   } catch (error) {
+//     next(error)
+//   }
+// })
+
 reviewsRouter.get("/", async (req, res, next) => {
   try {
-    const reviews = await ReviewModel.find({}).populate("product").populate("user")
-    res.send(reviews)
+      const query = q2m(req.query)
+      const { total, reviews } = await ReviewModel.findReviews(query) // this func populates "product" and "user"
+      res.send({ links: query.links("/reviews", total), total, reviews, pageTotal: Math.ceil(total / query.options.limit) })
   } catch (error) {
-    next(error)
+      console.log(error);
+      next(error);
   }
 })
 

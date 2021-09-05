@@ -12,7 +12,7 @@ const productRouter = Router()
 productRouter.get("/", async (req, res, next) => {
     try {
         const query = q2m(req.query)
-        const { total, products } = await ProductModel.findProducts(query)
+        const { total, products } = await ProductModel.findProducts(query) // this func populates("reviews")
         res.send({ links: query.links("/products", total), total, products, pageTotal: Math.ceil(total / query.options.limit) })
     } catch (error) {
         console.log(error);
