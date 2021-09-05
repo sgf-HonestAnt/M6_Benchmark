@@ -35,7 +35,7 @@ reviewsRouter.post("/", async (req, res, next) => {
     // 2021-09-05T12:48:34.497347+00:00 app[web.1]:   valueType: 'string'
     // 2021-09-05T12:48:34.497348+00:00 app[web.1]: }
     // 2021-09-05T12:48:34.497326+00:00 heroku[router]: at=info method=POST path="/reviews" host=honestant-m6-benchmark-be.herokuapp.com request_id=0a8df890-055d-49b4-a9fd-fc8b154506cb fwd="86.141.5.12" dyno=web.1 connect=0ms service=114ms status=500 bytes=271 protocol=https
-    //   const product = await productModel.findByIdAndUpdate(req.body.product[0], { $push: { reviews: _id } })
+      const product = await productModel.findByIdAndUpdate(req.body.product, { $push: { reviews: _id } })
     res.status(201).send({ _id, product })
   } catch (error) {
     next(error)
