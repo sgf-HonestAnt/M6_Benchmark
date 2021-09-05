@@ -10,6 +10,8 @@ import usersRouter from './services/users/index.js'
 
 const server = express()
 
+// heroku deployment: this step still to do https://www.mongodb.com/developer/how-to/use-atlas-on-heroku/#configuring-heroku-ip-addresses-in-mongodb-atlas
+
 server.use(cors())
 server.use(express.json())
 

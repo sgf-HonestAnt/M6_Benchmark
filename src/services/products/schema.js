@@ -9,7 +9,7 @@ const productSchema = new Schema({
     brand: { type: String, required: true },
     imageUrl: { type: String, required: true },
     price: { type: Number, required: true },
-    category: { type: String, required: true, enum: ["CategoryOne", "CategoryTwo", "CategoryTree"] },
+    category: { type: String, required: true, enum: ["Category One", "Category Two", "Category Three"] },
     reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
 }, {
     timestamps: true
