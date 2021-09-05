@@ -9,8 +9,8 @@ reviewsRouter.post("/", async (req, res, next) => {
   // product-details>index => sends comment by user to product ID { userId to be passed in req.body }
   try {
     const newReview = new ReviewModel(req.body)
-    const { _id } = await newReview.save()
-    const product = await productModel.findByIdAndUpdate(req.body.product[0], { $push: { reviews: _id } })
+    const { _id } = await newReview.save() // this is saving, but not pushing the _id to product model
+    const product = await productModel.findByIdAndUpdate(req.body.product[0], { $push: { reviews: _id.toObject() } })
     res.status(201).send({ _id, product })
   } catch (error) {
     next(error)
