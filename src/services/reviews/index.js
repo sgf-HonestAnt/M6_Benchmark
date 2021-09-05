@@ -44,7 +44,7 @@ reviewsRouter.post("/", async (req, res, next) => {
 
 reviewsRouter.get("/", async (req, res, next) => {
   try {
-    const reviews = await ReviewModel.find({}).populate("product")
+    const reviews = await ReviewModel.find({}).populate("product").populate("user")
     res.send(reviews)
   } catch (error) {
     next(error)
@@ -54,7 +54,7 @@ reviewsRouter.get("/", async (req, res, next) => {
 reviewsRouter.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id
-    const review = await ReviewModel.findById(id).populate("product")
+    const review = await ReviewModel.findById(id).populate("product").populate("user")
     if (review) {
       res.send(review)
     } else {
