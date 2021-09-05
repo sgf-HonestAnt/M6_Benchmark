@@ -12,7 +12,6 @@ reviewsRouter.post("/", async (req, res, next) => {
     const { _id } = await newReview.save()
     const product = await productModel.findByIdAndUpdate(req.body.product[0], { $push: { reviews: _id } })
     res.status(201).send({ _id, product })
-
   } catch (error) {
     next(error)
   }

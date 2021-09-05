@@ -37,8 +37,8 @@ productRouter.get("/:id", async (req, res, next) => {
 productRouter.post("/", async (req, res, next) => {
     try {
         const newData = new ProductModel(req.body)
-        await newData.save()
-        res.status(201).send()
+        const {_id } = await newData.save()
+        res.status(201).send({_id})
     } catch (error) {
         console.log(error);
         next(error);
